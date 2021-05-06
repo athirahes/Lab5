@@ -1,6 +1,7 @@
 package console.clientSide;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -24,16 +25,16 @@ public class ClientApplication {
 		System.out.println("\nClientSideApplication: Start Demo of application.\n");
 
 		ItemProduct item1 = new ItemProduct();
-		item1.setName("Spritzer Water Bottle");
-		item1.setPrice(43.45f);
+		item1.setName("Spritzer 5000ml Water Bottle ");
+		item1.setPrice(19.45f);
 
 		ItemProduct item2 = new ItemProduct();
 		item2.setName("Cactus Water Bottle");
-		item2.setPrice(76.89f);
+		item2.setPrice(32.89f);
 
 		ItemProduct item3 = new ItemProduct();
-		item3.setName("Dasani Water Bottle");
-		item3.setPrice(33.13f);
+		item3.setName("Dasani Water Bottle :3");
+		item3.setPrice(10.13f);
 
 		List<ItemProduct> itemProduct = new ArrayList<ItemProduct>();
 		itemProduct.add(item1);
@@ -54,17 +55,32 @@ public class ClientApplication {
 			ObjectOutputStream objectOS = new ObjectOutputStream(socket.getOutputStream());
 
 			// Send request to server
-			System.out.println("Send object to server: " + itemProduct);
 			objectOS.writeObject(itemProduct);
 			objectOS.flush();
 			
+			
+			
+			
 			//receive itemProduct id from server
-
+			ObjectInputStream objectIS = new ObjectInputStream(socket.getInputStream()); //Open stream to receive object
+			// Get object from stream, cast and display details
+			itemProduct = (ArrayList<ItemProduct>) objectIS.readObject();
+			
+			for(ItemProduct itemproduct: itemProduct) {
+				
+				System.out.println ("\nName  :  " + itemproduct.getName());
+				System.out.println ("Price : RM" + itemproduct.getPrice());
+				System.out.println ("Assigned ID: " + itemproduct.getItemProductId());
+				
+			}	
+			
+			
 			// Close all closable objects
 			objectOS.close();
+			objectIS.close();
 			socket.close();
 
-		} catch (IOException e) {
+		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
