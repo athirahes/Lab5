@@ -55,6 +55,7 @@ public class ServerApplication {
 				ObjectInputStream objectIS = new ObjectInputStream(socket.getInputStream());
 
 				// Get object from stream and display details
+				@SuppressWarnings("unchecked")
 				List<ItemProduct> itemProduct = (ArrayList<ItemProduct>) objectIS.readObject();
 				System.out.println("\nTotal item requested by client: " + itemProduct.size());
 				int i = 1;

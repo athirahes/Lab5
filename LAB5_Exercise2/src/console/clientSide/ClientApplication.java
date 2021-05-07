@@ -16,6 +16,7 @@ public class ClientApplication {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		/*
 		 * Receive information from server 
