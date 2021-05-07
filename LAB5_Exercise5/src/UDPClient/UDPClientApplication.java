@@ -11,7 +11,7 @@ public class UDPClientApplication {
 
 	public static void main(String[] args) {
 
-		System.out.println("UDPClientApplication: Demonstration of UDP Client-Side Application.");
+		System.out.println("UDPClientApplication: Demonstration of Client-Side Application.");
 
 		try {
 
@@ -54,9 +54,8 @@ public class UDPClientApplication {
 			String wordCount = new String(inPacket.getData());
 			System.out.println("Word Count:" + wordCount);
 
-			clientSocket.close();
-
 			System.out.println("UDPClientApplication: end of program.");
+			clientSocket.close();
 
 		} catch (IOException e) {
 

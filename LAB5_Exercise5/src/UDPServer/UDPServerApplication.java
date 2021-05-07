@@ -9,7 +9,7 @@ public class UDPServerApplication {
 
 	public static void main(String[] args) {
 
-		System.out.println("UDPServerApplication: Demonstration of UDP Server-Side Application.");
+		System.out.println("UDPServerApplication: Demonstration of Server-Side Application.");
 
 		try {
 
@@ -60,8 +60,6 @@ public class UDPServerApplication {
 				// Send the created packet to client
 				serverDatagramSocket.send(sendPacket); 
 
-				// Close the socket connection
-				serverDatagramSocket.close();
 			}
 
 		} catch (IOException e) {
