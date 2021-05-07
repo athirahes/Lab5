@@ -62,10 +62,14 @@ public class ClientApplication {
 			
 			
 			//receive itemProduct id from server
-			ObjectInputStream objectIS = new ObjectInputStream(socket.getInputStream()); //Open stream to receive object
+			
+			//Open stream to receive object
+			ObjectInputStream objectIS = new ObjectInputStream(socket.getInputStream()); 
+			
 			// Get object from stream, cast and display details
 			itemProduct = (ArrayList<ItemProduct>) objectIS.readObject();
 			
+			// Display data
 			for(ItemProduct itemproduct: itemProduct) {
 				
 				System.out.println ("\nName  :  " + itemproduct.getName());
@@ -76,8 +80,6 @@ public class ClientApplication {
 			
 			
 			// Close all closable objects
-			objectOS.close();
-			objectIS.close();
 			socket.close();
 
 		} catch (IOException | ClassNotFoundException e) {
