@@ -12,25 +12,24 @@ import model.ItemProduct;
 
 public class ServerApplication {
 
-	public ServerApplication() {
-
-	}
-
 	public static void validateProductName(String pName) {
 		
 		String s = "VALID";
+		
 		for(int i=0; i<pName.length(); i++) {
+			
 			char c = pName.charAt(i);
 			boolean alphanumeric = Character.isLetterOrDigit(c);
 			boolean space = c == ' ';
 			
 			if (!alphanumeric) {
-				if (!space) {
-				s = "INVALID (name should contain only alphanumeric characters and spaces)";
+				if (!space) {		
+				s = "INVALID (name should contain only alphanumeric characters and spaces)";	
 				}
 			}
-			
+		
 		}
+		
 		System.out.println(s);
 
 	}
@@ -38,6 +37,7 @@ public class ServerApplication {
 	public static void main(String[] args) {
 
 		try {
+			
 			// Port to receive and respond to request
 			int portNo = 4228;
 			ServerSocket serverSocket = new ServerSocket(portNo);
@@ -46,6 +46,7 @@ public class ServerApplication {
 
 			// Server need to be alive forever thus the while(true)
 			while (true) {
+				
 				// Accept client request for connection
 				Socket socket = serverSocket.accept();
 
@@ -78,17 +79,17 @@ public class ServerApplication {
 				
 				
 											
-				// sends itemProduct List to client
-				ObjectOutputStream objectOS = new ObjectOutputStream(socket.getOutputStream()); // Open stream to send object
+				// sends itemProduct List back to client
+				// Create Open stream to send object to client
+				ObjectOutputStream objectOS = new ObjectOutputStream(socket.getOutputStream()); 
 				
-				objectOS.writeObject(itemProduct); // sends data to client
-				
-				System.out.println("Ready for next request");
-				
+				// sends data to client
+				objectOS.writeObject(itemProduct); 
 				
 				// Close all closable objects
-				objectIS.close();
-				objectOS.close();
+				serverSocket.close(); 
+				
+				System.out.println("Ready for next request");
 				
 			}
 
