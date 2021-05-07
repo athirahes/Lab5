@@ -86,13 +86,11 @@ public class ServerApplication {
 				
 				// sends data to client
 				objectOS.writeObject(itemProduct); 
-				
-				// Close all closable objects
-				serverSocket.close(); 
+
 				
 				System.out.println("Ready for next request");
 				
-			}
+			}	
 
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
